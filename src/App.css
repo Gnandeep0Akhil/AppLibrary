@@ -84,11 +84,110 @@ body {
   font-family: "Bahiana";
   font-weight: bolder;
   letter-spacing: 5px;
-  font-size: 96px;
+  font-size: 128px;
+  line-height: 128px;
   text-shadow: 5px 0 rgb(12, 25, 31), -5px 0 rgb(12, 25, 31),
     0 5px rgb(12, 25, 31), 0 -5px rgb(12, 25, 31), 2px 2px rgb(12, 25, 31),
     -2px -2px rgb(12, 25, 31), 2px -2px rgb(12, 25, 31),
     -2px 2px rgb(12, 25, 31);
+}
+
+.spellbox {
+  background: url("./Images/spellcheck.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area {
+  width: 100%;
+  height: 75%;
+  padding: 0px 100px;
+  display: flex;
+  align-items: center;
+}
+
+textarea {
+  height: 100%;
+  width: 100%;
+  
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  border: none !important;
+  overflow: auto;
+  outline: none !important;
+  box-shadow: none !important;
+  resize: none;
+
+  background-color: rgb(208, 201, 195) !important;
+  border-style: solid !important;
+  border-color: rgb(74, 68, 59) !important;
+  border-width: 2px !important;
+  border-radius: 5px !important;
+  padding: 30px !important;
+  font-size: 30px !important;
+  font-family: "Adamina" !important;
+}
+
+.textarea {
+  height: 100%;
+  width: 100%;
+  
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  border: none !important;
+  overflow: auto;
+  outline: none !important;
+  box-shadow: none !important;
+  resize: none;
+
+  background-color: rgb(208, 201, 195) !important;
+  border-style: solid !important;
+  border-color: rgb(74, 68, 59) !important;
+  border-width: 2px !important;
+  border-radius: 5px;
+  padding: 30px !important;
+  font-size: 30px !important;
+  font-family: "Adamina" !important;
+}
+
+.label {
+  font-size: 64px;
+  font-weight: bolder;
+  font-family: 'Adamina' !important;
+  color: rgb(74, 68, 59) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 50px;
+
+  text-shadow: 5px 0 rgb(208, 201, 195), -5px 0 rgb(208, 201, 195),
+    0 5px rgb(208, 201, 195), 0 -5px rgb(208, 201, 195), 2px 2px rgb(208, 201, 195),
+    -2px -2px rgb(208, 201, 195), 2px -2px rgb(208, 201, 195),
+    -2px 2px rgb(208, 201, 195);
+}
+
+.btn {
+  padding: 7px 15px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Adamina' !important;
+  position: absolute;
+  letter-spacing: 2px;
+  right: 120px;
+  bottom: 120px;
+  background-color: rgb(74, 68, 59);
+  color: rgb(208, 201, 195);
 }
 
 @media screen and (max-width: 1200px) {
