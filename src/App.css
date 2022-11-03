@@ -115,7 +115,7 @@ body {
 textarea {
   height: 100%;
   width: 100%;
-  
+
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -139,7 +139,7 @@ textarea {
 .textarea {
   height: 100%;
   width: 100%;
-  
+
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -163,7 +163,7 @@ textarea {
 .label {
   font-size: 64px;
   font-weight: bolder;
-  font-family: 'Adamina' !important;
+  font-family: "Adamina" !important;
   color: rgb(74, 68, 59) !important;
   display: flex;
   flex-direction: column;
@@ -172,16 +172,16 @@ textarea {
   margin-right: 50px;
 
   text-shadow: 5px 0 rgb(208, 201, 195), -5px 0 rgb(208, 201, 195),
-    0 5px rgb(208, 201, 195), 0 -5px rgb(208, 201, 195), 2px 2px rgb(208, 201, 195),
-    -2px -2px rgb(208, 201, 195), 2px -2px rgb(208, 201, 195),
-    -2px 2px rgb(208, 201, 195);
+    0 5px rgb(208, 201, 195), 0 -5px rgb(208, 201, 195),
+    2px 2px rgb(208, 201, 195), -2px -2px rgb(208, 201, 195),
+    2px -2px rgb(208, 201, 195), -2px 2px rgb(208, 201, 195);
 }
 
 .btn {
   padding: 7px 15px;
   font-size: 20px;
   font-weight: bold;
-  font-family: 'Adamina' !important;
+  font-family: "Adamina" !important;
   position: absolute;
   letter-spacing: 2px;
   right: 120px;
@@ -189,6 +189,47 @@ textarea {
   background-color: rgb(74, 68, 59);
   color: rgb(208, 201, 195);
 }
+
+.dropbtn {
+  border: none;
+
+  background-color: yellow;
+  border-radius: 5px;
+  padding: 1px 2px 1px 2px;
+  margin: 1px 2px 1px 2px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  max-height: 320px;
+  overflow-y: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 8px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 20px !important;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {color: yellow; background-color: rgb(74, 68, 59);}
+
 
 @media screen and (max-width: 1200px) {
   .main {
