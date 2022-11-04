@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function SpellCheck(props) {
   const d = "https://sg.api.textgears.com/spelling?";
@@ -9,108 +9,96 @@ function SpellCheck(props) {
 
   const [text, setText] = useState("");
   const [init, setInit] = useState(true);
-  
-  const check = () => {
-    setInit(false);
+  const [erross, setErross] = useState([]);
+
+  useEffect(() => {
+    !init && proceed(erross);
+  }, [init]);
+
+  const update = (element, errorObj) => {
+    const main = document.getElementById(errorObj.id);
+    while (main.lastElementChild) {
+      main.removeChild(main.lastElementChild);
+    }
+    main.innerText = element;
+    toast.success(`'${errorObj.bad}' replaced with '${element}'`);
+  };
+
+  const proceed = (errors) => {
+    var bits = [];
+    var start = 0;
+    for (let i = 0; i <= errors.length; i++) {
+      if (!!errors[i]) {
+        const pre = " " + text.slice(start, errors[i].offset - 1) + " ";
+        const main =
+          " " +
+          text.slice(errors[i].offset, errors[i].offset + errors[i].length) +
+          " ";
+        const spanmain = document.createElement("div");
+        spanmain.className = "dropdown";
+        spanmain.id = errors[i].id;
+        const spanbutton = document.createElement("button");
+        spanbutton.innerText = main;
+        spanbutton.className = "dropbtn";
+        spanmain.appendChild(spanbutton);
+        const dropd = document.createElement("div");
+        dropd.className = "dropdown-content";
+        errors[i].better.forEach((element) => {
+          const spancontent = document.createElement("a");
+          spancontent.href = "#";
+          spancontent.innerText = element;
+          spancontent.onclick = () => update(element, errors[i]);
+          dropd.appendChild(spancontent);
+        });
+        spanmain.appendChild(dropd);
+
+        const spanpre = document.createElement("span");
+        spanpre.innerText = pre;
+
+        bits = !!errors[i].offset
+          ? [...bits, spanpre, spanmain]
+          : [...bits, spanmain];
+        start = errors[i].offset + errors[i].length + 1;
+      } else {
+        const pre = " " + text.slice(start, text.length) + " ";
+        const spanpre = document.createElement("span");
+        spanpre.innerText = pre;
+
+        bits = [...bits, spanpre];
+        start = 0;
+      }
+    }
+    const node = document.querySelector(".textfrom");
+    node.innerText = "";
+    bits.forEach((elem) => {
+      node.appendChild(elem);
+    });
+  };
+
+  const manage = () => {
     var res = text.split(" ").join("+");
     var url = d + key + res + t;
     axios
       .get(url)
       .then((res) => {
-        var bits = [];
-        var start = 0;
         var errors = res.data.response.errors;
-        for (let i = 0; i <= errors.length; i++) {
-          if (!!errors[i]) {
-            const pre = " " + text.slice(start, errors[i].offset - 1) + " ";
-            const main =
-              " " +
-              text.slice(
-                errors[i].offset,
-                errors[i].offset + errors[i].length
-              ) +
-              " ";
-            start = errors[i].offset + errors[i].length + 1;
-
-            let options = [];
-            errors[i].better.forEach((element) => {
-              const opt = React.createElement(
-                "a",
-                {
-                  href: "#",
-                  onClick: () => {
-                    update(i, element);
-                  },
-                },
-                element
-              );
-              options = [...options, opt];
-            });
-            const dropdown = React.createElement(
-              "div",
-              { className: "dropdown-content" },
-              options
-            );
-            const display = React.createElement(
-              "button",
-              {
-                className: "dropbtn",
-              },
-              main
-            );
-            const group = React.createElement(
-              "div",
-              { className: "dropdown" },
-              display,
-              dropdown
-            );
-
-            const preelem = React.createElement("span", {}, pre);
-            const mainelem = React.createElement("span", {}, group);
-            bits = [...bits, preelem, mainelem];
-          } else {
-            const pre = " " + text.slice(start, text.length) + " ";
-            start = 0;
-            const preelem = React.createElement("span", {}, pre);
-            bits = [...bits, preelem];
-          }
-          getContent(bits);
-        }
-        const title = React.createElement("div", {}, bits);
-        const root = ReactDOM.createRoot(document.querySelector(".textarea"));
-        root.render(title);
+        setErross([...errors]);
+        !!errors.length
+          ? setInit(false)
+          : toast.warn("No wrongly spelled words present.");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const update = (i, elem) => {
-    var data = localStorage.getItem('content');
-    var finalData = JSON.parse(data);
-    const index = 2 * (i + 1);
-    let items = [...finalData];
-    if (index !== -1) {
-      const nowelem = React.createElement("span", {}, elem);
-      var newItems = [];
-      items.forEach((e, i)=>{
-        if(i===index){
-          newItems = [...newItems, nowelem];
-        }else{
-          newItems = [...newItems, e]
-        }
-      })
+  const check = () => {
+    if (init) {
+      !!text.length ? manage() : toast.error("Please enter text to proceed.");
+    } else {
+      setInit(true);
+      setText("");
     }
-    const title = React.createElement("div", {}, items);
-
-    const root = ReactDOM.createRoot(document.querySelector(".textarea"));
-    root.render(title);
-    localStorage.setItem("content", JSON.stringify(items));
-  };
-
-  const getContent = (content) => {
-    console.log(content);
-    localStorage.setItem("content", JSON.stringify(content));
   };
 
   return (
@@ -123,7 +111,7 @@ function SpellCheck(props) {
         <div style={{ width: "100%", height: "100%" }}>
           {init ? (
             <textarea
-              className="form-control from"
+              className="textarea"
               data-gramm="false"
               data-gramm_editor="false"
               data-enable-grammarly="false"
@@ -131,10 +119,15 @@ function SpellCheck(props) {
               onChange={(e) => setText(e.target.value)}
             ></textarea>
           ) : (
-            <div className="textarea">Loading...</div>
+            <div className="textfrom">Loading...</div>
           )}
           <button className="btn" onClick={() => check()}>
-            Check
+            {init ? "Check" : "Reset"}
+            {init ? (
+              <i class="fad fa-spell-check cicon"></i>
+            ) : (
+              <i class="fad fa-history cicon"></i>
+            )}
           </button>
         </div>
       </div>

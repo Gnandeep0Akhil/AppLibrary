@@ -112,7 +112,7 @@ body {
   align-items: center;
 }
 
-textarea {
+.textarea {
   height: 100%;
   width: 100%;
 
@@ -130,13 +130,13 @@ textarea {
   border-style: solid !important;
   border-color: rgb(74, 68, 59) !important;
   border-width: 2px !important;
-  border-radius: 5px !important;
+  border-radius: 5px;
   padding: 30px !important;
   font-size: 30px !important;
   font-family: "Adamina" !important;
 }
 
-.textarea {
+.textfrom {
   height: 100%;
   width: 100%;
 
@@ -211,7 +211,7 @@ textarea {
   min-width: 160px;
   max-height: 320px;
   overflow-y: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 10px 0px 0px 10px;
 }
@@ -224,12 +224,98 @@ textarea {
   font-size: 20px !important;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-.dropdown:hover .dropbtn {color: yellow; background-color: rgb(74, 68, 59);}
+.dropdown:hover .dropbtn {
+  color: yellow;
+  background-color: rgb(74, 68, 59);
+}
 
+.cicon {
+  margin-left: 10px;
+}
+
+.Toastify__toast--error {
+  border: 1px solid #eb5757;
+  border-radius: 10px !important;
+  background: #fae1e2 !important;
+}
+.Toastify__toast--error::after {
+  position: absolute;
+  color: #333333;
+  font-size: 15px;
+  font-family: "Adamina";
+  font-weight: 700;
+  left: 265px;
+  padding-top: 14px !important;
+}
+.Toastify__toast--error::before {
+  position: relative;
+  z-index: 100000;
+  left: 12px;
+  top: 6px;
+}
+.Toastify__toast--success {
+  border: 1px solid #3a9ea5 !important;
+  border-radius: 10px !important;
+  background: #d6dedf !important;
+}
+.Toastify__toast--success::before {
+  position: relative;
+  z-index: 100000;
+  left: 12px;
+  top: 6px;
+}
+.Toastify__toast--success::after {
+  position: absolute;
+  color: #333333;
+  font-size: 15px;
+  font-family: "Adamina";
+  font-weight: 700;
+  left: 265px;
+  padding-top: 14px !important;
+}
+.Toastify__toast--warning {
+  border: 1px solid #e78326 !important;
+  border-radius: 10px !important;
+  background: #fadfc5 !important;
+}
+.Toastify__toast--warning::before {
+  position: relative;
+  z-index: 100000;
+  left: 12px;
+  top: 6px;
+}
+.Toastify__toast--warning::after {
+  position: absolute;
+  color: #e78326;
+  font-size: 15px;
+  font-family: "Adamina";
+  font-weight: 700;
+  left: 265px;
+  padding-top: 14px !important;
+}
+.Toastify__toast-body {
+  color: #444c63;
+  font-size: 16px;
+  font-family: "Adamina";
+  padding-left: 20px;
+  line-height: 20px;
+  padding: 0px;
+  padding-top: 25px;
+  width: 100%;
+  font-weight: 400;
+  margin-left: 25px !important;
+}
+.Toastify__toast > button > svg {
+  display: none;
+}
 
 @media screen and (max-width: 1200px) {
   .main {
@@ -243,5 +329,26 @@ textarea {
 
   .custom {
     margin: 15px 0px 15px 0px;
+  }
+
+  .area {
+    width: 100%;
+    padding: 0px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    padding: 7px 15px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Adamina" !important;
+    position: absolute;
+    letter-spacing: 2px;
+    right: 100px;
+    bottom: 140px;
+    background-color: rgb(74, 68, 59);
+    color: rgb(208, 201, 195);
   }
 }
