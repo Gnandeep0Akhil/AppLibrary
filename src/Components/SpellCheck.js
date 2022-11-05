@@ -107,6 +107,7 @@ function SpellCheck(props) {
         <label class="form-label label">
           <div>Spell</div>
           <div>Check</div>
+          <p>Paste-Check-Copy</p>
         </label>
         <div style={{ width: "100%", height: "100%" }}>
           {init ? (
