@@ -133,7 +133,7 @@ function Weather() {
                       fontSize: "15px",
                     }}
                   >
-                    Latitude: {latlong.lat}&deg;
+                    Lat: {latlong.lat.toFixed(2)}&deg;
                   </p>
                   <p
                     style={{
@@ -141,7 +141,7 @@ function Weather() {
                       fontSize: "15px",
                     }}
                   >
-                    Longitude: {latlong.lon}&deg;
+                    Lon: {latlong.lon.toFixed(2)}&deg;
                   </p>
                 </div>
               </div>
