@@ -93,7 +93,7 @@ function Weather() {
         {data ? (
           <>
             <div className="bodyhead">
-              <div className="d-flex justify-content-center align-items-center">
+              <div className="d-flex justify-content-center align-items-center w-25">
                 <div
                   className="d-flex justify-content-center align-items-center"
                   style={{ marginRight: "25px", width: "30%" }}
@@ -105,7 +105,7 @@ function Weather() {
                   <p style={{ marginLeft: "5px", fontSize: "15px" }}>{desc}</p>
                 </div>
               </div>
-              <div className="d-flex justify-content-center align-items-center">
+              <div className="d-flex justify-content-center align-items-center w-25">
                 <div
                   className="d-flex justify-content-center align-items-center"
                   style={{ marginRight: "25px", width: "30%" }}
@@ -119,7 +119,7 @@ function Weather() {
                   </p>
                 </div>
               </div>
-              <div className="d-flex justify-content-center align-items-center">
+              <div className="d-flex justify-content-center align-items-center w-25">
                 <div
                   className="d-flex justify-content-center align-items-center"
                   style={{ marginRight: "25px", width: "30%" }}
@@ -133,7 +133,7 @@ function Weather() {
                       fontSize: "15px",
                     }}
                   >
-                    Lat: {latlong.lat.toFixed(2)}&deg;
+                    Latitude: {latlong.lat.toFixed(0)}&deg;
                   </p>
                   <p
                     style={{
@@ -141,7 +141,7 @@ function Weather() {
                       fontSize: "15px",
                     }}
                   >
-                    Lon: {latlong.lon.toFixed(2)}&deg;
+                    Longitude: {latlong.lon.toFixed(0)}&deg;
                   </p>
                 </div>
               </div>
@@ -189,7 +189,7 @@ function Weather() {
               </div>
               <div class="cardw">
                 <h5 className="header">
-                  <i class="fad fa-gem mr-5 fa-lg"></i> Pressure
+                  <i class="fad fa-parachute-box mr-5 fa-lg"></i> Pressure
                 </h5>
                 <p>{pressure} hPa</p>
                 <p className="small">
