@@ -260,6 +260,129 @@ body {
   margin-left: 10px;
 }
 
+/* weather app */
+
+.weatherbox {
+  background: url("./Images/weatherapp.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 100px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.description {
+  font-size: 64px;
+  line-height: 75px;
+  font-weight: bolder;
+  font-family: "Allerta Stencil" !important;
+  color: rgb(25, 73, 95) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 30px;
+  padding: 20px;
+
+  backdrop-filter: blur(30px);
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.description p {
+  font-size: 16px;
+  font-weight: bolder;
+  font-family: "Allerta Stencil" !important;
+  color: rgb(25, 73, 95) !important;
+}
+
+.form-weather {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnw {
+  font-size: 20px;
+  margin-left: 10px;
+  border-style: solid;
+  border-radius: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btnw:hover {
+  background-color: rgb(25, 73, 95);
+  color: rgb(208, 201, 195);
+}
+
+.weatherinfo {
+  height: 100%;
+  width: 70%;
+
+  overflow: auto;
+
+  background-color: transparent !important;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  padding: 30px !important;
+  font-size: 30px !important;
+  font-family: "Allerta Stencil" !important;
+}
+
+.bodyhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.cardw {
+  margin: 5px 30px;
+  width: 190px;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  height: 190px;
+  border-radius: 30px;
+  backdrop-filter: blur(30px);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  text-align: center;
+}
+
+.header {
+  margin: 15px 0px 20px 0px;
+}
+
+.headerw {
+  margin: 9px 0px 12px 0px;
+}
+
+.small {
+  font-size: 10px !important;
+}
+
+.fast-spin {
+  -webkit-animation: fa-spin 1s infinite linear;
+  animation: fa-spin 1s infinite linear;
+}
+
 .Toastify__toast--error {
   border: 1px solid #eb5757;
   border-radius: 10px !important;
@@ -376,5 +499,41 @@ body {
     color: rgb(208, 201, 195);
     border-style: solid;
     border-color: yellow;
+  }
+
+  .weatherbox {
+    background: url("./Images/weatherapp.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bodyhead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .cardw {
+    margin: 10px 0px;
+    width: 185px;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    height: 185px;
+    border-radius: 30px;
+    backdrop-filter: blur(30px);
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    text-align: center;
   }
 }
