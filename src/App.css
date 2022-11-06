@@ -440,7 +440,17 @@ body {
 
 .valueInput {
   -webkit-appearance: none;
-  -moz-appearance: none;.para {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  height: 40px;
+  border-radius: 3px;
+  padding: 5px 15px;
+}
+
+.para {
   margin: 24px 50px;
   font-size: 24px;
   height: 20% !important;
@@ -450,13 +460,18 @@ body {
   font-family: "Cherry Bomb" !important;
   color: rgb(222, 222, 222) !important;
 }
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border: none;
-  height: 40px;
-  border-radius: 3px;
-  padding: 5px 15px;
+
+.convert {
+  border-style: solid;
+  padding: 10px;
+  border-radius: 100%;
+  border-color: rgb(222, 222, 222);
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.convert:hover {
+  border-color: rgb(204, 85, 81);
 }
 
 .Toastify__toast--error {

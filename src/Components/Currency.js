@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
+import { toast } from "react-toastify";
 
 function Currency() {
-  // var init = "https://free.currconv.com/api/v7/convert?q=";
-  // var complete = "&compact=ultra&apiKey=6226b17607669d15b38e";
   const codes = [
     {
       label: "AED",
@@ -682,17 +681,44 @@ function Currency() {
   const [to, setTo] = useState("");
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
-  const [util, setUtil] = useState(true);
 
-  useEffect(() => {}, [util]);
+  const convert = () => {
+    const val = !!fromValue || !!toValue;
+    if (!!from && !!to && val) {
+      var myHeaders = new Headers();
+      myHeaders.append("apikey", "sGNPMICZy0WGgT0jv4a1gi6UvFCkDlh1");
 
-  const convert = (event) => {
-    if (!!from && !!to) {
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+      };
+
+      fetch(
+        `https://api.apilayer.com/currency_data/convert?to=${
+          !!fromValue ? to.value : from.value
+        }&from=${!!fromValue ? from.value : to.value}&amount=${
+          !!fromValue ? fromValue : toValue
+        }`,
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => {
+          console.log(result);
+          if (!!fromValue) {
+            setToValue(JSON.parse(result).result);
+          } else {
+            setFromValue(JSON.parse(result).result);
+          }
+        })
+        .catch((error) => console.log("error", error));
+    } else {
+      toast.error("Please enter currency codes and value to convert.");
     }
   };
 
   const styles = {
-    option: (provided, state) => ({
+    option: (provided) => ({
       ...provided,
       color: "rgb(85, 85, 85)",
       fontFamily: "Cherry Bomb !important",
@@ -700,7 +726,7 @@ function Currency() {
       padding: "5px 10px",
       fontSize: "18px",
     }),
-    singleValue: (provided, state) => ({
+    singleValue: (provided) => ({
       ...provided,
       color: "rgb(190,65,65)",
       fontFamily: "Cherry Bomb !important",
@@ -725,7 +751,6 @@ function Currency() {
               value={from}
               onChange={(option) => {
                 setFrom(option);
-                setUtil(!util);
               }}
               styles={styles}
               name="fromSelect"
@@ -738,15 +763,17 @@ function Currency() {
               disabled={!!!from}
               onChange={(e) => {
                 setFromValue(e.target.value);
-                convert(e);
               }}
               placeholder="Amount..."
             />
           </div>
-          <i
-            class="fad fa-sync-alt fa-spin"
-            style={{ fontSize: "50px", color: "rgb(222,222,222)" }}
-          ></i>
+          <div className="convert">
+            <i
+              class="fas fa-sync-alt"
+              style={{ fontSize: "50px", color: "rgb(222,222,222)" }}
+              onClick={() => convert()}
+            ></i>
+          </div>
           <div className="curry">
             <Select
               myFontSize="30px"
@@ -754,7 +781,6 @@ function Currency() {
               value={to}
               onChange={(option) => {
                 setTo(option);
-                setUtil(!util);
               }}
               styles={styles}
               name="toSelect"
@@ -767,7 +793,6 @@ function Currency() {
               value={toValue}
               onChange={(e) => {
                 setToValue(e.target.value);
-                convert(e);
               }}
               placeholder="Amount..."
             />
