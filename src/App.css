@@ -383,6 +383,82 @@ body {
   animation: fa-spin 1s infinite linear;
 }
 
+/* Currency Converter */
+
+.CurrencyMain {
+  background: url("./Images/Currencyconverter.jpg");
+  background-repeat: repeat-y;
+  background-size: 100% 100%;
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+}
+
+.arena {
+  margin: 20vh 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.CurrencyDesc {
+  font-size: 98px;
+  line-height: 75px;
+  font-weight: bolder;
+  font-family: "Cherry Bomb" !important;
+  color: rgb(222, 222, 222) !important;
+  letter-spacing: 0.5vw;
+  line-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  height: 50vh;
+}
+
+.CurrencyInfo {
+  width: 25vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
+.curry {
+  height: 35% !important;
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+  justify-content: space-evenly;
+}
+
+.valueInput {
+  -webkit-appearance: none;
+  -moz-appearance: none;.para {
+  margin: 24px 50px;
+  font-size: 24px;
+  height: 20% !important;
+  width: 35vw !important;
+  line-height: 24px;
+  font-weight: bolder;
+  font-family: "Cherry Bomb" !important;
+  color: rgb(222, 222, 222) !important;
+}
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  height: 40px;
+  border-radius: 3px;
+  padding: 5px 15px;
+}
+
 .Toastify__toast--error {
   border: 1px solid #eb5757;
   border-radius: 10px !important;
@@ -535,5 +611,36 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     padding: 10px;
     text-align: center;
+  }
+
+  .arena {
+    margin: 0vh 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .CurrencyDesc {
+    font-size: 64px;
+    font-weight: bolder;
+    font-family: "Cherry Bomb" !important;
+    color: white !important;
+    line-height: 75px !important;
+    font-weight: 100;
+    width: 100vw;
+    height: 50vh;
+  }
+
+  .CurrencyInfo {
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
   }
 }
