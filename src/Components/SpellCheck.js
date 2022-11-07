@@ -3,8 +3,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function SpellCheck(props) {
+  const auth = process.env.REACT_APP_SPELL_KEY;
   const d = "https://sg.api.textgears.com/spelling?";
-  const key = "key=aiAu8Y3OaN0Pokab&text=";
+  const key = `key=${auth}=`;
   const t = "&language=en-GB";
 
   const [text, setText] = useState("");

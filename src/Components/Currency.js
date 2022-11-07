@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { toast } from "react-toastify";
 
 function Currency() {
   const codes = [
@@ -681,40 +680,101 @@ function Currency() {
   const [to, setTo] = useState("");
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
+  const [trigger, setTrigger] = useState({
+    event: "",
+    value: "",
+  });
 
-  const convert = () => {
-    const val = !!fromValue || !!toValue;
-    if (!!from && !!to && val) {
-      var myHeaders = new Headers();
-      myHeaders.append("apikey", "sGNPMICZy0WGgT0jv4a1gi6UvFCkDlh1");
-
-      var requestOptions = {
-        method: "GET",
-        redirect: "follow",
-        headers: myHeaders,
-      };
-
-      fetch(
-        `https://api.apilayer.com/currency_data/convert?to=${
-          !!fromValue ? to.value : from.value
-        }&from=${!!fromValue ? from.value : to.value}&amount=${
-          !!fromValue ? fromValue : toValue
-        }`,
-        requestOptions
-      )
-        .then((response) => response.text())
-        .then((result) => {
-          console.log(result);
-          if (!!fromValue) {
+  useEffect(() => {
+    if (trigger.event === "top") {
+      if (!!to && !!fromValue) {
+        // regular thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${to.value}&from=${from.value}&amount=${fromValue}`;
+        // insert bottom
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
             setToValue(JSON.parse(result).result);
-          } else {
+          })
+          .catch((error) => console.log("error", error));
+      } else if (!!to && !!toValue) {
+        // opposite thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${from.value}&from=${to.value}&amount=${toValue}`;
+        // insert top
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
             setFromValue(JSON.parse(result).result);
-          }
-        })
-        .catch((error) => console.log("error", error));
-    } else {
-      toast.error("Please enter currency codes and value to convert.");
+          })
+          .catch((error) => console.log("error", error));
+      }
+    } else if (trigger.event === "bottom") {
+      if (!!from && !!toValue) {
+        // opposite thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${from.value}&from=${to.value}&amount=${toValue}`;
+        // insert top
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
+            setFromValue(JSON.parse(result).result);
+          })
+          .catch((error) => console.log("error", error));
+      } else if (!!from && !!fromValue) {
+        // regular thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${to.value}&from=${from.value}&amount=${fromValue}`;
+        // insert bottom
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
+            setToValue(JSON.parse(result).result);
+          })
+          .catch((error) => console.log("error", error));
+      }
+    } else if (trigger.event === "topAmount") {
+      if (!!from && !!to) {
+        // regular thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${to.value}&from=${from.value}&amount=${fromValue}`;
+        // insert bottom
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
+            setToValue(JSON.parse(result).result);
+          })
+          .catch((error) => console.log("error", error));
+      }
+    } else if (trigger.event === "bottomAmount") {
+      if (!!to && !!from) {
+        // opposite thing
+        const url = `https://api.apilayer.com/currency_data/convert?to=${from.value}&from=${to.value}&amount=${toValue}`;
+        // insert top
+        const promise = convert(url);
+        promise
+          .then((response) => response.text())
+          .then((result) => {
+            setFromValue(JSON.parse(result).result);
+          })
+          .catch((error) => console.log("error", error));
+      }
     }
+  }, [JSON.stringify(trigger)]);
+
+  const convert = (url) => {
+    const auth = process.env.REACT_APP_CURRENCY_KEY;
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", `${auth}`);
+
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+      headers: myHeaders,
+    };
+
+    return fetch(url, requestOptions);
   };
 
   const styles = {
@@ -742,6 +802,7 @@ function Currency() {
         <div class="CurrencyDesc">
           <div>Currency</div>
           <div>Converter</div>
+          <p>Dynamic Exchange Rates.</p>
         </div>
         <div className="CurrencyInfo">
           <div className="curry">
@@ -751,6 +812,10 @@ function Currency() {
               value={from}
               onChange={(option) => {
                 setFrom(option);
+                setTrigger({
+                  event: "top",
+                  value: option,
+                });
               }}
               styles={styles}
               name="fromSelect"
@@ -763,17 +828,18 @@ function Currency() {
               disabled={!!!from}
               onChange={(e) => {
                 setFromValue(e.target.value);
+                setTrigger({
+                  event: "topAmount",
+                  value: e.target.value,
+                });
               }}
               placeholder="Amount..."
             />
           </div>
-          <div className="convert">
-            <i
-              class="fas fa-sync-alt"
-              style={{ fontSize: "50px", color: "rgb(222,222,222)" }}
-              onClick={() => convert()}
-            ></i>
-          </div>
+          <i
+            class="fad fa-sync-alt fa-spin"
+            style={{ fontSize: "50px", color: "rgb(222,222,222)" }}
+          ></i>
           <div className="curry">
             <Select
               myFontSize="30px"
@@ -781,6 +847,10 @@ function Currency() {
               value={to}
               onChange={(option) => {
                 setTo(option);
+                setTrigger({
+                  event: "bottom",
+                  value: option,
+                });
               }}
               styles={styles}
               name="toSelect"
@@ -793,6 +863,10 @@ function Currency() {
               value={toValue}
               onChange={(e) => {
                 setToValue(e.target.value);
+                setTrigger({
+                  event: "bottomAmount",
+                  value: e.target.value,
+                });
               }}
               placeholder="Amount..."
             />

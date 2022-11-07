@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 
 function Weather() {
+  const auth = process.env.REACT_APP_WEATHER_KEY;
   var d = "https://api.openweathermap.org/data/2.5/weather?";
-  var key = "&appid=0ddfc471a0c63f2e9d5172df7c5ad701&units=metric";
+  var key = `&appid=${auth}&units=metric`;
   const [data, setData] = useState(false);
   const [city, setCity] = useState("");
   const [name, setName] = useState("");

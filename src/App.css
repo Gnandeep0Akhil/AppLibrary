@@ -403,7 +403,6 @@ body {
 
 .CurrencyDesc {
   font-size: 98px;
-  line-height: 75px;
   font-weight: bolder;
   font-family: "Cherry Bomb" !important;
   color: rgb(222, 222, 222) !important;
@@ -415,6 +414,17 @@ body {
   justify-content: center;
   width: 25vw;
   height: 50vh;
+}
+
+.CurrencyDesc p {
+  font-size: 25px !important;
+  width: 125% !important;
+  font-weight: 100 !important;
+  letter-spacing: 5px !important;
+  line-height: 50px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .CurrencyInfo {
@@ -459,19 +469,6 @@ body {
   font-weight: bolder;
   font-family: "Cherry Bomb" !important;
   color: rgb(222, 222, 222) !important;
-}
-
-.convert {
-  border-style: solid;
-  padding: 10px;
-  border-radius: 100%;
-  border-color: rgb(222, 222, 222);
-  cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.convert:hover {
-  border-color: rgb(204, 85, 81);
 }
 
 .Toastify__toast--error {
@@ -657,5 +654,16 @@ body {
 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
+  }
+
+  .CurrencyDesc p {
+    font-size: 25px !important;
+    width: 100% !important;
+    font-weight: 100 !important;
+    letter-spacing: 3px !important;
+    line-height: 50px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
