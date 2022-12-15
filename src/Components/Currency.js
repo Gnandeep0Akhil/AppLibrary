@@ -761,6 +761,7 @@ function Currency() {
           .catch((error) => console.log("error", error));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(trigger)]);
 
   const convert = (url) => {

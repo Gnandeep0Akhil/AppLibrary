@@ -14,6 +14,7 @@ function SpellCheck(props) {
 
   useEffect(() => {
     !init && proceed(erross);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [init]);
 
   const update = (element, errorObj) => {
